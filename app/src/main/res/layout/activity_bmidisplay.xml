@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@drawable/background"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/enter_height_TextView"
+        style="@style/Instruction_TextView_look"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+
+
+        android:text="@string/enter_height_textview" />
+
+    <EditText
+        android:id="@+id/height_EditText"
+        style="@style/Data_EditText_look"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/enter_height_TextView"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/david_libre"
+        android:hint="@string/meters" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        style="@style/Instruction_TextView_look"
+        android:id="@+id/enter_weight_TextView"
+        android:layout_below="@+id/height_EditText"
+        android:text="@string/enter_weight_textview"
+         />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:id="@+id/weight_EditText"
+        style="@style/Data_EditText_look"
+        android:layout_below="@+id/enter_weight_TextView"
+        android:hint="@string/kilograms"/>
+
+    <Button
+        android:layout_below="@+id/weight_EditText"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="90dp"
+        android:id="@+id/calculate_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/tick_for_button"/>
+
+    <RelativeLayout
+        android:id="@+id/Display_RelativeLayout"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/calculate_button">
+
+        <ImageView
+            android:id="@+id/image_person_ImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="15dp"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false" />
+
+
+        <TextView
+            android:id="@+id/BMI_Display_TextView"
+            android:fontFamily="@font/david_libre"
+            android:inputType="numberDecimal"
+            android:layout_width="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="20dp"
+            android:layout_height="30dp"
+            android:textSize="20sp"
+            android:textColor="@color/basic_white">
+
+        </TextView>
+
+
+        <TextView
+            android:id="@+id/title_TextView"
+            android:fontFamily="@font/david_libre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/BMI_Display_TextView"
+            android:layout_centerHorizontal="true"
+            android:textSize="20sp"
+            android:layout_toRightOf="@+id/image_person_ImageView"
+            android:textColor="@color/basic_white" />
+
+        <TextView
+            android:fontFamily="@font/david_libre"
+            android:id="@+id/description_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/title_TextView"
+            android:inputType="textMultiLine"
+            android:maxLines="20"
+            android:layout_toRightOf="@+id/image_person_ImageView"
+            android:textSize="10sp"
+            android:textColor="@color/basic_white" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

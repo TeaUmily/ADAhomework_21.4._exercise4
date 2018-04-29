@@ -24,12 +24,11 @@ public class BMIDisplayActivity extends AppCompatActivity {
     @BindView(R.id.Display_RelativeLayout) RelativeLayout RelativeLayout_Display;
 
 
-    double mHight;
+    double mHeight;
     double mWeight;
     double mResult;
     BMICalculator mCalculator;
-    BMIChart mBMI_chart;
-
+    BMICategory mCategory;
 
 
     @Override
@@ -37,6 +36,8 @@ public class BMIDisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bmidisplay);
         ButterKnife.bind(this);
+
+
     }
 
    @OnClick (R.id.calculate_button)
@@ -49,16 +50,17 @@ public class BMIDisplayActivity extends AppCompatActivity {
             checkWeight();
 
             setResources();
+            mCalculator = new BMICalculator(mHeight, mWeight);
 
-            mCalculator = new BMICalculator(mHight, mWeight);
             mResult = mCalculator.calculateBMI();
-            mBMI_chart = new BMIChart(mResult);
 
-            setElementsInLayout(mBMI_chart);
+            setCategory();
+
+            setElementsInLayout();
 
             TextView_Display_BMI.setText(String.valueOf(round(mResult)));
-            TextView_title.setText(mBMI_chart.getBMICondition_name());
-            TextView_discription.setText(mBMI_chart.getBMIDiscription());
+            TextView_title.setText(mCategory.getCondition_name());
+            TextView_discription.setText(mCategory.getDescription());
         }
 
         catch(EmptyFieldException e){
@@ -82,6 +84,24 @@ public class BMIDisplayActivity extends AppCompatActivity {
 
     }
 
+    private void setCategory() {
+
+            if(mResult < 18.5){
+                mCategory = new Underweight(this);
+            }
+            if(mResult >= 18.5 && mResult < 24.99){
+                mCategory = new Healthy(this);
+            }
+            if (mResult >= 25 && mResult < 29.99){
+                mCategory = new Overweight(this);
+            }
+            if(mResult >= 30){
+                mCategory = new Obese(this);
+            }
+
+
+    }
+
     private void checkInputZero()throws InputZeroException {
         if(Double.parseDouble(EditText_weight.getText().toString())==0 || Double.parseDouble(EditText_height.getText().toString())==0){
             throw new InputZeroException("Input can not be zero!");
@@ -97,10 +117,9 @@ public class BMIDisplayActivity extends AppCompatActivity {
     private void checkHeight() throws IllegalHeightException {
         if(Double.parseDouble(EditText_height.getText().toString())>2.5){
             throw new IllegalHeightException("Illegal height!");
+
         }
     }
-
-
 
     private void checkInput() throws EmptyFieldException {
         if(EditText_height.getText().toString().isEmpty() || EditText_weight.getText().toString().isEmpty()){
@@ -108,28 +127,28 @@ public class BMIDisplayActivity extends AppCompatActivity {
         }
     }
 
-    private void setElementsInLayout(BMIChart mBMI_chart) {
+    private void setElementsInLayout() {
 
-            if(mBMI_chart.getBMICondition_name().equals("Underweight"))
+            if(mCategory.getCondition_name().equals("Underweight"))
             {
                 ImageView_image_person.setImageResource(R.drawable.underweight);
                 RelativeLayout_Display.setBackgroundColor(getResources().getColor(R.color.underweightBackground));
 
             }
 
-            if(mBMI_chart.getBMICondition_name().equals("Healthy")){
+            if(mCategory.getCondition_name().equals("Healthy")){
 
                 ImageView_image_person.setImageResource(R.drawable.healthy);
                 RelativeLayout_Display.setBackgroundColor(getResources().getColor(R.color.healthyWeightBackground));
             }
 
-            if(mBMI_chart.getBMICondition_name().equals("Overweight")) {
+            if(mCategory.getCondition_name().equals("Overweight")) {
 
                 ImageView_image_person.setImageResource(R.drawable.overweight);
                 RelativeLayout_Display.setBackgroundColor(getResources().getColor(R.color.overweightBackground));
             }
 
-            if(mBMI_chart.getBMICondition_name().equals("Obese")){
+            if(mCategory.getCondition_name().equals("Obese")){
 
                 ImageView_image_person.setImageResource(R.drawable.obese);
                 RelativeLayout_Display.setBackgroundColor(getResources().getColor(R.color.obeseBackground));
@@ -139,7 +158,7 @@ public class BMIDisplayActivity extends AppCompatActivity {
 
 
     private void setResources() {
-        mHight=Double.parseDouble(EditText_height.getText().toString());
+        mHeight =Double.parseDouble(EditText_height.getText().toString());
         mWeight=Double.parseDouble(EditText_weight.getText().toString());
     }
 

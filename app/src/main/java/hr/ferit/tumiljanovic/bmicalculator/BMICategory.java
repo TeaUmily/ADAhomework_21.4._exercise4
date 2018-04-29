@@ -1,5 +1,7 @@
 package hr.ferit.tumiljanovic.bmicalculator;
 
+import android.content.Context;
+
 abstract public class BMICategory {
 
     public abstract String getDescription();

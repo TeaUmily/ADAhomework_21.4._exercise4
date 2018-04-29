@@ -1,21 +1,27 @@
 package hr.ferit.tumiljanovic.bmicalculator;
 
+import android.content.Context;
 import android.content.res.Resources;
+
 
 public class Obese extends BMICategory {
 
-    private String discription;
+
+    private String description;
     private String condition_name;
+    private Context context;
     
-    public Obese() {
-        this.condition_name = "Obese";
-        this.discription ="A BMI of over 30 indicates that you are obese. Your health may be at risk if you do not lose weight. You are recommended to talk to your Doctor or a dietician for advice.";
+    public Obese(Context context) {
+
+        this.context=context;
+        this.condition_name = context.getString(R.string.Obese);
+        this.description = context.getString(R.string.Obese_description);
     }
     
 
     @Override
     public String getDescription() {
-        return discription;
+        return description;
     }
 
     @Override

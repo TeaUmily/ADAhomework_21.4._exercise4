@@ -1,23 +1,23 @@
 package hr.ferit.tumiljanovic.bmicalculator;
 
-import android.content.res.Resources;
-
-import butterknife.OnClick;
+import android.content.Context;
 
 public class Overweight extends BMICategory {
 
-    private String discription;
+    private String description;
     private String condition_name;
+    private Context context;
 
-    public Overweight() {
-        this.condition_name = "Overweight";
-        this.discription = "A BMI of 25 - 29.9 indicates that you are slightly overweight. You may be advised to lose some weight for health reasons. You are recommended to talk to your Doctor or a dietician for advice.Resources.getSystem().getString(R.string.overweight_description)";
+    public Overweight(Context context) {
+        this.context = context;
+        this.condition_name = context.getString(R.string.Overweight);
+        this.description = context.getString(R.string.Overweight_description);
     }
 
 
     @Override
     public String getDescription() {
-        return discription;
+        return description;
     }
 
     @Override

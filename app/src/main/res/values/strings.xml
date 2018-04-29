@@ -5,5 +5,12 @@
     <string name="meters">meters</string>
     <string name="enter_weight_textview">Enter your weight in kilograms:</string>
     <string name="your_bmi">Your BMI:</string>
+    <string name="Obese">Obese</string>
+    <string name="Obese_description">A BMI of over 30 indicates that you are obese. Your health may be at risk if you do not lose weight. You are recommended to talk to your Doctor or a dietician for advice.</string>
+    <string name="Healthy">Healthy</string>
+    <string name="Overweight">Overweight</string>
+    <string name="Underweight">Underweight</string>
+    <string name="Overweight_description">A BMI of 25 - 29.9 indicates that you are slightly overweight. You may be advised to lose some weight for health reasons. You are recommended to talk to your Doctor or a dietician for advice.Resources.getSystem().getString(R.string.overweight_description)</string>
+    <string name="Underweight_description">A BMI of less than 18.5 indicates that you are underweight, so you may need to put on some weight. You are recommended to ask your Doctor or a dietician for advice.</string>
 
 </resources>

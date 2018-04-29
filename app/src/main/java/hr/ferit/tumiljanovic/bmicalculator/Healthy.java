@@ -1,21 +1,23 @@
 package hr.ferit.tumiljanovic.bmicalculator;
 
-import android.content.res.Resources;
+import android.content.Context;
 
 public class Healthy extends BMICategory {
 
-    private String discription;
+    private String description;
     private String condition_name;
+    private Context context;
 
-    public Healthy() {
-        this.condition_name = "Healthy";
-        this.discription = "A BMI of 18.5 - 24.9 indicates that you are at a healthy weight for your height. By maintaining a healthy weight, you lower your risk of developing serious health problems.";
+    public Healthy(Context context) {
+        this.context= context;
+        this.condition_name = context.getString(R.string.Healthy);
+        this.description = "A BMI of 18.5 - 24.9 indicates that you are at a healthy weight for your height. By maintaining a healthy weight, you lower your risk of developing serious health problems.";
     }
 
 
     @Override
     public String getDescription() {
-        return discription;
+        return description;
     }
 
     @Override

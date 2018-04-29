@@ -1,21 +1,23 @@
 package hr.ferit.tumiljanovic.bmicalculator;
 
-import android.content.res.Resources;
+import android.content.Context;
 
- public class Underweight extends BMICategory {
+public class Underweight extends BMICategory {
 
-    private String discription;
+    private String description;
     private String condition_name;
+    private Context context;
 
-    public Underweight() {
-        this.condition_name = "Underweight";
-        this.discription ="A BMI of less than 18.5 indicates that you are underweight, so you may need to put on some weight. You are recommended to ask your Doctor or a dietician for advice.";
+    public Underweight(Context context) {
+        this.context = context;
+        this.condition_name = context.getString(R.string.Underweight);
+        this.description =context.getString(R.string.Underweight_description);
     }
 
 
      @Override
      public String getDescription() {
-         return discription;
+         return description;
      }
 
      @Override

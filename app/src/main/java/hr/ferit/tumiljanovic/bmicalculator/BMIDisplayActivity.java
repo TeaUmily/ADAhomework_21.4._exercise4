@@ -1,5 +1,6 @@
 package hr.ferit.tumiljanovic.bmicalculator;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -24,11 +25,11 @@ public class BMIDisplayActivity extends AppCompatActivity {
     @BindView(R.id.Display_RelativeLayout) RelativeLayout RelativeLayout_Display;
 
 
+    BMICategories mCategory;
     double mHeight;
     double mWeight;
     double mResult;
     BMICalculator mCalculator;
-    BMICategory mCategory;
 
 
     @Override
@@ -59,8 +60,8 @@ public class BMIDisplayActivity extends AppCompatActivity {
             setElementsInLayout();
 
             TextView_Display_BMI.setText(String.valueOf(round(mResult)));
-            TextView_title.setText(mCategory.getCondition_name());
-            TextView_discription.setText(mCategory.getDescription());
+            TextView_title.setText(mCategory.getNameResource());
+            TextView_discription.setText(mCategory.getDescriptionResource());
         }
 
         catch(EmptyFieldException e){
@@ -87,16 +88,16 @@ public class BMIDisplayActivity extends AppCompatActivity {
     private void setCategory() {
 
             if(mResult < 18.5){
-                mCategory = new Underweight(this);
+                mCategory = BMICategories.UNDERWEIGHT;
             }
             if(mResult >= 18.5 && mResult < 24.99){
-                mCategory = new Healthy(this);
+                mCategory = BMICategories.HEALTHY;
             }
             if (mResult >= 25 && mResult < 29.99){
-                mCategory = new Overweight(this);
+                mCategory = BMICategories.OVERWEIGHT;
             }
             if(mResult >= 30){
-                mCategory = new Obese(this);
+                mCategory = BMICategories.OBESE;
             }
 
 
@@ -123,32 +124,32 @@ public class BMIDisplayActivity extends AppCompatActivity {
 
     private void checkInput() throws EmptyFieldException {
         if(EditText_height.getText().toString().isEmpty() || EditText_weight.getText().toString().isEmpty()){
-            throw new EmptyFieldException("Field empty!");
+            throw new EmptyFieldException("An empty field!");
         }
     }
 
     private void setElementsInLayout() {
 
-            if(mCategory.getCondition_name().equals("Underweight"))
+            if(getString(mCategory.getNameResource()).equals("Underweight"))
             {
                 ImageView_image_person.setImageResource(R.drawable.underweight);
                 RelativeLayout_Display.setBackgroundColor(getResources().getColor(R.color.underweightBackground));
 
             }
 
-            if(mCategory.getCondition_name().equals("Healthy")){
+            if(getString(mCategory.getNameResource()).equals("Healthy")){
 
                 ImageView_image_person.setImageResource(R.drawable.healthy);
                 RelativeLayout_Display.setBackgroundColor(getResources().getColor(R.color.healthyWeightBackground));
             }
 
-            if(mCategory.getCondition_name().equals("Overweight")) {
+            if(getString(mCategory.getNameResource()).equals("Overweight")) {
 
                 ImageView_image_person.setImageResource(R.drawable.overweight);
                 RelativeLayout_Display.setBackgroundColor(getResources().getColor(R.color.overweightBackground));
             }
 
-            if(mCategory.getCondition_name().equals("Obese")){
+            if(getString(mCategory.getNameResource()).equals("Obese")){
 
                 ImageView_image_person.setImageResource(R.drawable.obese);
                 RelativeLayout_Display.setBackgroundColor(getResources().getColor(R.color.obeseBackground));
@@ -165,6 +166,5 @@ public class BMIDisplayActivity extends AppCompatActivity {
     private double round(double value){
         return  (Math.round(value * 100.000) / 100.000);
     }
-
 
 }
